@@ -1,14 +1,19 @@
 const express = require("express");
 const app = express();
 
+app.get("/favicon.ico", (req, res) => {});
+
 app.use((req, res, next) => {
-	console.log("1st Middleware Reached.. Next() called...");
+	console.log("Middleware Called");
 	next();
 });
 
-app.use((req, res) => {
-	console.log("2nd Middleware Reached.. Next() called...");
-	res.send("<h1>Last Middleware Reached</h1>");
+app.use("/users", (req, res) => {
+	res.send("<h2>These are the users");
+});
+
+app.use("/", (req, res) => {
+	res.send("<h1>This is the Home Page '/'</h1>");
 });
 
 app.listen(3000, "localhost", () => {
